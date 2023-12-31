@@ -1,0 +1,19 @@
+{
+  "name": "foodexplorerapi",
+  "version": "1.0.0",
+  "description": "API for the FoodExplorer project",
+  "main": "/src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiagosf-dev/food-explorer-api.git"
+  },
+  "author": "Thiago Soares Figueiredo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thiagosf-dev/food-explorer-api/issues"
+  },
+  "homepage": "https://github.com/thiagosf-dev/food-explorer-api#readme"
+}
