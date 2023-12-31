@@ -10,14 +10,13 @@ app.use(express.json());
 
 const PORT = Number(process.env.PORT) || 3030;
 
-app.get(`/status`, (_request, response) => {
-  throw new AppError("teste", 500);
+app.get(`/status`, (_request, response) =>
   response.status(200).json({
     API_STATUS: `running`,
     API_PORT: process.env.PORT || PORT,
     API_NAME: `foodexplorerapi`,
-  });
-});
+  })
+);
 
 app.use((error, request, response, next) => {
   console.error(`⛔`, error);
