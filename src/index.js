@@ -1,20 +1,42 @@
 "use strict";
 
 require("dotenv/config");
+require("express-async-errors");
 const express = require("express");
+const AppError = require("./utils/AppError");
 
 const app = express();
 app.use(express.json());
 
 const PORT = Number(process.env.PORT) || 3030;
 
-app.get(`/status`, (_request, response) =>
+app.get(`/status`, (_request, response) => {
+  throw new AppError("teste", 500);
   response.status(200).json({
     API_STATUS: `running`,
     API_PORT: process.env.PORT || PORT,
     API_NAME: `foodexplorerapi`,
-  })
-);
+  });
+});
+
+app.use((error, request, response, next) => {
+  console.error(`⛔`, error);
+
+  if (error instanceof AppError) {
+    return response.status(error.statusCode).json({
+      status: "error",
+      message: error.message,
+      statusCode: error.statusCode,
+    });
+  }
+
+  return response.status(500).json({
+    status: "error",
+    message: "Internal server error",
+    messageLog: error.message,
+    statusCode: error.statusCode,
+  });
+});
 
 app.listen(PORT, () =>
   console.info(`Server running in http://localhost:${PORT}`)
