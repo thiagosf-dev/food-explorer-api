@@ -2,8 +2,9 @@
   "name": "foodexplorerapi",
   "version": "1.0.0",
   "description": "API for the FoodExplorer project",
-  "main": "/src/index.js",
+  "main": "src/index.js",
   "scripts": {
+    "dev": "nodemon --watch src .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
