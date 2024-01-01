@@ -1,6 +1,6 @@
-"use strict";
+`use strict`;
 
-const AppError = require("../utils/AppError");
+const AppError = require(`../utils/AppError`);
 
 class UserFindByIdService {
   constructor(usersRepository) {

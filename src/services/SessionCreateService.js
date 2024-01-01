@@ -1,10 +1,10 @@
 `use strict`;
 
-const knex = require("../database/knex");
-const { compare } = require("bcrypt");
-const { sign } = require("jsonwebtoken");
-const authConfig = require("../configs/auth");
-const AppError = require("../utils/AppError");
+const knex = require(`../database/knex`);
+const { compare } = require(`bcrypt`);
+const { sign } = require(`jsonwebtoken`);
+const authConfig = require(`../configs/auth`);
+const AppError = require(`../utils/AppError`);
 
 class SessionCreateService {
   constructor(userRepository) {

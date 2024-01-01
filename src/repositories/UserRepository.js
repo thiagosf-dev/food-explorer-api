@@ -1,10 +1,10 @@
-"use strict";
+`use strict`;
 
-const knex = require("../database/knex");
+const knex = require(`../database/knex`);
 
 class UserRepository {
   async create({ name, email, password }) {
-    const [userId] = await knex("users").insert({
+    const [userId] = await knex(`users`).insert({
       name,
       email,
       password,
@@ -13,13 +13,13 @@ class UserRepository {
   }
 
   async findByEmail(email) {
-    const user = await knex("users").where({ email }).first();
+    const user = await knex(`users`).where({ email }).first();
     return user;
   }
 
   async findById(userId) {
-    const user = knex("users")
-      .select("id", "name", "email")
+    const user = knex(`users`)
+      .select(`id`, `name`, `email`)
       .where({ id: userId })
       .limit(1)
       .first();

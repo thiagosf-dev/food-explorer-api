@@ -1,11 +1,11 @@
-"use strict";
+`use strict`;
 
-require("dotenv/config");
-require("express-async-errors");
-const cors = require("cors");
-const express = require("express");
-const AppError = require("./utils/AppError");
-const routes = require("./routes");
+require(`dotenv/config`);
+require(`express-async-errors`);
+const cors = require(`cors`);
+const express = require(`express`);
+const AppError = require(`./utils/AppError`);
+const routes = require(`./routes`);
 
 const app = express();
 app.use(express.json());
@@ -27,15 +27,15 @@ app.use((error, request, response, next) => {
 
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({
-      status: "error",
+      status: `error`,
       message: error.message,
       statusCode: error.statusCode,
     });
   }
 
   return response.status(500).json({
-    status: "error",
-    message: "Internal server error",
+    status: `error`,
+    message: `Internal server error`,
     messageLog: error.message,
     statusCode: error.statusCode,
   });

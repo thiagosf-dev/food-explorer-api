@@ -1,7 +1,7 @@
-"use strict";
+`use strict`;
 
-const AppError = require("./../utils/AppError");
-const { hash } = require("bcrypt");
+const AppError = require(`./../utils/AppError`);
+const { hash } = require(`bcrypt`);
 
 class UserCreateService {
   constructor(userRepository) {
@@ -9,10 +9,15 @@ class UserCreateService {
   }
 
   async execute({ name, email, password }) {
+    if (!name) throw new AppError(`O nome deve ser informado.`);
+
+    if (!email) throw new AppError(`O e-mail deve ser informado.`);
+
+    if (!password) throw new AppError(`A senha deve ser informada.`);
+
     const queryCheckUserExists = await this.userRepository.findByEmail(email);
 
-    if (queryCheckUserExists)
-      throw new AppError("Este e-mail já está em uso.");
+    if (queryCheckUserExists) throw new AppError(`Este e-mail já está em uso.`);
 
     const hashedPasword = await hash(password, 8);
 
