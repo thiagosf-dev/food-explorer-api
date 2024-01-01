@@ -15,9 +15,20 @@ class SessionController {
     const userRepository = new UserRepository();
 
     const sessionCreateService = new SessionCreateService(userRepository);
-    const user = sessionCreateService.execute({ email, password });
+    const { user, token } = await sessionCreateService.execute({
+      email,
+      password,
+    });
 
-    console.log(`user :>> `, user);
+    if (user && token) {
+      response.cookie(`token`, token, {
+        httpOnly: true,
+        sameSite: `none`,
+        secure: true,
+        maxAge: 15 * 60 * 1000,
+      });
+    }
+
     return response.status(200).json(user);
   }
 }
