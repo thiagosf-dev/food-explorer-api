@@ -33,14 +33,7 @@ class SessionCreateService {
 
     delete user.password;
 
-    response.cookie(`token`, token, {
-      httpOnly: true,
-      sameSite: `none`,
-      secure: true,
-      maxAge: 15 * 60 * 1000,
-    });
-
-    return user;
+    return { user, token };
   }
 }
 
