@@ -14,7 +14,7 @@ class SessionController {
 
     const userRepository = new UserRepository();
 
-    const sessionCreateService = SessionCreateService(userRepository);
+    const sessionCreateService = new SessionCreateService(userRepository);
     const user = sessionCreateService.execute({ email, password });
 
     console.log(`user :>> `, user);
