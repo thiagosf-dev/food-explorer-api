@@ -30,6 +30,17 @@ class SessionCreateService {
       subject: String(user.id),
       expiresIn,
     });
+
+    delete user.password;
+
+    response.cookie(`token`, token, {
+      httpOnly: true,
+      sameSite: `none`,
+      secure: true,
+      maxAge: 15 * 60 * 1000,
+    });
+
+    return user;
   }
 }
 
