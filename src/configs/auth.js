@@ -1,6 +1,8 @@
+`use strict`;
+
 module.exports = {
-    jwt: {
-      secret: "default",
-      expiresIn: "1d",
-    },
-  };
+  jwt: {
+    secret: process.env.AUTH_SECRET || `default`,
+    expiresIn: process.env.EXPIRESIN || `1d`,
+  },
+};
