@@ -1,8 +1,8 @@
 `use strict`;
 
-const UserRepository = require("../repositories/UserRepository");
-const SessionCreateService = require("../services/SessionCreateService");
-const AppError = require("../utils/AppError");
+const UserRepository = require(`../repositories/UserRepository`);
+const SessionCreateService = require(`../services/SessionCreateService`);
+const AppError = require(`../utils/AppError`);
 
 class SessionController {
   async create(request, response) {
@@ -17,7 +17,7 @@ class SessionController {
     const sessionCreateService = SessionCreateService(userRepository);
     const user = sessionCreateService.execute({ email, password });
 
-    console.log("user :>> ", user);
+    console.log(`user :>> `, user);
     return response.status(200).json(user);
   }
 }
