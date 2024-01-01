@@ -20,14 +20,15 @@ class SessionController {
       password,
     });
 
-    if (user && token) {
-      response.cookie(`token`, token, {
-        httpOnly: true,
-        sameSite: `none`,
-        secure: true,
-        maxAge: 15 * 60 * 1000,
-      });
-    }
+    if (!user || !token)
+      throw new AppError(`Ocorreu um erro ao tentar criar uma sessão.`);
+
+    response.cookie(`token`, token, {
+      httpOnly: true,
+      sameSite: `none`,
+      secure: true,
+      maxAge: 15 * 60 * 1000,
+    });
 
     return response.status(200).json(user);
   }
