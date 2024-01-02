@@ -36,8 +36,8 @@ class DishRepository {
     return knex(`dishes`).where({ id }).limit(1).first();
   }
 
-  async findByName(name) {
-    return knex(`dishes`).where({ name }).limit(1).first();
+  async findByNameWhereUserId(name, user_id) {
+    return knex(`dishes`).where({ name, user_id }).limit(1).first();
   }
 }
 

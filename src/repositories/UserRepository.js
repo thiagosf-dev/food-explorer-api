@@ -3,27 +3,22 @@
 const knex = require(`../database/knex`);
 
 class UserRepository {
-  async create({ name, email, password }) {
+  async create({ name, email, password, role }) {
     const [userId] = await knex(`users`).insert({
       name,
       email,
       password,
+      role,
     });
     return userId;
   }
 
   async findByEmail(email) {
-    const user = await knex(`users`).where({ email }).first();
-    return user;
+    return await knex(`users`).select(`*`).where({ email }).limit(1).first();
   }
 
   async findById(userId) {
-    const user = knex(`users`)
-      .select(`id`, `name`, `email`)
-      .where({ id: userId })
-      .limit(1)
-      .first();
-    return user;
+    return knex(`users`).select(`*`).where({ id: userId }).limit(1).first();
   }
 }
 

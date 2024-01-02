@@ -7,12 +7,17 @@ const UserFindByIdService = require(`../services/UserFindByIdService.js`);
 
 class UserController {
   async create(request, response) {
-    const { name, email, password } = request.body;
+    const { name, email, password, role } = request.body;
 
     const userRepository = new UserRepository();
 
     const userCreateService = new UserCreateService(userRepository);
-    const userId = await userCreateService.execute({ name, email, password });
+    const userId = await userCreateService.execute({
+      name,
+      email,
+      password,
+      role,
+    });
 
     const userFindByIdService = new UserFindByIdService(userRepository);
     const newUser = await userFindByIdService.execute(userId);

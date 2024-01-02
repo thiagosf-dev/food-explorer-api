@@ -10,8 +10,7 @@ exports.up = (knex) =>
         useNative: true,
         enumName: `roles`,
       })
-      .notNullable()
-      .default(`customer`);
+      .notNullable();
 
     table.timestamp(`created_at`).default(knex.fn.now());
     table.timestamp(`updated_at`).default(knex.fn.now());

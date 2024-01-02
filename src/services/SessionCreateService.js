@@ -12,7 +12,7 @@ class SessionCreateService {
   }
 
   async execute({ email, password }) {
-    const user = await knex(`users`).where({ email }).first();
+    const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError(`E-mail e/ou senha incorreta.`, 401);
@@ -26,7 +26,7 @@ class SessionCreateService {
 
     const { secret, expiresIn } = authConfig.jwt;
 
-    const token = sign({ role: user.role }, secret, {
+    const token = sign({ role: user.role }, authConfig.jwt.secret, {
       subject: String(user.id),
       expiresIn,
     });

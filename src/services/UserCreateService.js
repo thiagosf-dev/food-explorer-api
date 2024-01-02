@@ -8,12 +8,14 @@ class UserCreateService {
     this.userRepository = userRepository;
   }
 
-  async execute({ name, email, password }) {
+  async execute({ name, email, role, password }) {
     if (!name) throw new AppError(`O nome deve ser informado.`);
 
     if (!email) throw new AppError(`O e-mail deve ser informado.`);
 
     if (!password) throw new AppError(`A senha deve ser informada.`);
+
+    if (!role) throw new AppError(`O nível de acesso deve ser informado.`);
 
     const queryCheckUserExists = await this.userRepository.findByEmail(email);
 
@@ -24,6 +26,7 @@ class UserCreateService {
     const userCreated = await this.userRepository.create({
       name,
       email,
+      role,
       password: hashedPasword,
     });
 

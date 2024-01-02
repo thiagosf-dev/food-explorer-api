@@ -6,8 +6,10 @@ const DishFindByIdService = require(`../services/DishFindByIdService`);
 
 class DishController {
   async create(request, response) {
-    const { name, category, description, price, image, user_id, ingredients } =
+    const { name, category, description, price, image, ingredients } =
       request.body;
+
+    const user_id = request.user.id;
 
     const dishRepository = new DishRepository();
 

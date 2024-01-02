@@ -32,7 +32,7 @@ class DishCreateService {
 
     if (!image) throw new AppError(`A imagem do prato deve ser informada.`);
 
-    const dish = await this.dishRepository.findByName(name);
+    const dish = await this.dishRepository.findByNameWhereUserId(name, user_id);
 
     if (dish) throw new AppError(`Já existe um prato com o nome informado.`);
 
