@@ -6,10 +6,12 @@ const cors = require(`cors`);
 const express = require(`express`);
 const AppError = require(`./utils/AppError`);
 const routes = require(`./routes`);
+const uploadConfig = require("./configs/upload.js");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER));
 app.use(routes);
 
 const PORT = Number(process.env.PORT) || 3030;
