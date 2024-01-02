@@ -1,8 +1,7 @@
-"use strict";
+`use strict`;
 
-const knex = require("../database/knex");
-const DiskStorage = require("../providers/DiskStorage");
-const AppError = require("../utils/AppError");
+const DishRepository = require("../repositories/DishRepository");
+const DishUpdateImageService = require("../services/DishUpdateImageService");
 
 class DishImageController {
   async update(request, response) {
@@ -10,31 +9,17 @@ class DishImageController {
     const user_id = request.user.id;
     const { filename } = request.file;
 
-    const user = await knex("users").where({ id: user_id }).first();
+    const dishRepository = new DishRepository();
 
-    if (!user)
-      throw new AppError(
-        "Somente usuário autenticado pode mudar a imagem do prato",
-        401
-      );
+    const dishUpdateImageService = new DishUpdateImageService(dishRepository);
 
-    const dish = await knex("dishes").where({ id }).first();
+    const dish = await dishUpdateImageService.execute({
+      filename,
+      id,
+      user_id,
+    });
 
-    if (!dish) throw new AppError(`Prato não cadastrado.`, 404);
-
-    const diskStorage = new DiskStorage();
-
-    if (dish.image) {
-      await diskStorage.deleteFile(user.avatar);
-    }
-
-    const fileName = await diskStorage.saveFile(filename);
-
-    dish.image = fileName;
-
-    await knex("dishes").update(dish).where({ id });
-
-    return response.status(200).json(user);
+    return response.status(200).json(dish);
   }
 }
 

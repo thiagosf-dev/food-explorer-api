@@ -33,11 +33,19 @@ class DishRepository {
   }
 
   async findById(id) {
-    return knex(`dishes`).where({ id }).limit(1).first();
+    return await knex(`dishes`).where({ id }).limit(1).first();
   }
 
   async findByNameWhereUserId(name, user_id) {
-    return knex(`dishes`).where({ name, user_id }).limit(1).first();
+    return await knex(`dishes`).where({ name, user_id }).limit(1).first();
+  }
+
+  async findByIdWhereUserId(id, user_id) {
+    return await knex(`dishes`).where({ id, user_id }).limit(1).first();
+  }
+
+  async updateImageById(dish, id) {
+    return await knex(`dishes`).update(dish).where({ id });
   }
 }
 
