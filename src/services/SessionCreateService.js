@@ -1,4 +1,4 @@
-`use strict`;
+"use strict";
 
 const knex = require(`../database/knex`);
 const { compare } = require(`bcrypt`);
@@ -26,7 +26,7 @@ class SessionCreateService {
 
     const { secret, expiresIn } = authConfig.jwt;
 
-    const token = sign({ role: user.role }, authConfig.jwt.secret, {
+    const token = sign({ role: user.role }, secret, {
       subject: String(user.id),
       expiresIn,
     });

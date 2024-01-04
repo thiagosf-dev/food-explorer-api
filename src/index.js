@@ -10,7 +10,17 @@ const uploadConfig = require("./configs/upload.js");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      `http://localhost:5173/`,
+      `http://localhost:5173`,
+      `hpp://127.0.0.1/5173/`,
+      `hpp://127.0.0.1/5173`,
+    ],
+    credentials: true,
+  })
+);
 app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER));
 app.use(routes);
 

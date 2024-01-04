@@ -1,4 +1,4 @@
-`use strict`;
+"use strict";
 
 const DishRepository = require("../repositories/DishRepository");
 const DishUpdateImageService = require("../services/DishUpdateImageService");

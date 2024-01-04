@@ -1,4 +1,4 @@
-`use strict`;
+"use strict";
 
 const { verify } = require(`jsonwebtoken`);
 const AppError = require(`../utils/AppError.js`);

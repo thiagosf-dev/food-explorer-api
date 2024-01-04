@@ -1,9 +1,10 @@
-`use strict`;
+"use strict";
 
 const AppError = require(`../utils/AppError.js`);
 const UserRepository = require(`../repositories/UserRepository.js`);
 const UserCreateService = require(`../services/UserCreateService.js`);
 const UserFindByIdService = require(`../services/UserFindByIdService.js`);
+const UserFindAllService = require("../services/UserFindAllService.js");
 
 class UserController {
   async create(request, response) {
@@ -25,6 +26,13 @@ class UserController {
     delete newUser.password;
 
     return response.status(201).json(newUser);
+  }
+
+  async show(request, response) {
+    const userRepository = new UserRepository();
+    const userFindAllService = new UserFindAllService(userRepository);
+    const users = userFindAllService.execute();
+    return response.status(200).json(users ?? []);
   }
 }
 

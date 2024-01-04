@@ -1,4 +1,4 @@
-`use strict`;
+"use strict";
 
 const knex = require(`../database/knex`);
 
@@ -18,7 +18,15 @@ class UserRepository {
   }
 
   async findById(userId) {
-    return knex(`users`).select(`*`).where({ id: userId }).limit(1).first();
+    return await knex(`users`)
+      .select(`*`)
+      .where({ id: userId })
+      .limit(1)
+      .first();
+  }
+
+  async findAll() {
+    return await knex(`users`);
   }
 }
 

@@ -1,4 +1,4 @@
-`use strict`;
+"use strict";
 
 const UserRepository = require(`../repositories/UserRepository`);
 const SessionCreateService = require(`../services/SessionCreateService`);

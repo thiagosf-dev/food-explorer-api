@@ -1,4 +1,4 @@
-`use strict`;
+"use strict";
 
 const AppError = require(`./../utils/AppError`);
 const { hash } = require(`bcrypt`);
@@ -15,7 +15,7 @@ class UserCreateService {
 
     if (!password) throw new AppError(`A senha deve ser informada.`);
 
-    if (!role) throw new AppError(`O nível de acesso deve ser informado.`);
+    if (!role) role = `customer`;
 
     const queryCheckUserExists = await this.userRepository.findByEmail(email);
 

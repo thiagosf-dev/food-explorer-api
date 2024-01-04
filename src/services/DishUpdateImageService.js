@@ -1,4 +1,4 @@
-`use strict`;
+"use strict";
 
 const knex = require(`../database/knex`);
 const DiskStorage = require(`../providers/DiskStorage`);
